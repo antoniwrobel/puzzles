@@ -131,7 +131,18 @@ const App = () => {
     userOrderArrayIndexes.every((v, i, a) => !i || a[i - 1] <= v)
 
   if (isSuccess) {
-    return <div>you did it! your score is {score}</div>
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          top: '40%',
+          textAlign: 'center',
+          width: '100%',
+        }}
+      >
+        you did it! your score is {score}
+      </div>
+    )
   }
 
   return (
@@ -144,7 +155,7 @@ const App = () => {
           width: '100%',
         }}
       >
-        {score ? `Your score:  ${score}` : 'click on a tile'}
+        {!score ? `Your score:  ${score}` : 'click on a tile'}
       </div>
       <div
         style={{
