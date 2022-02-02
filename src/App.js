@@ -155,7 +155,7 @@ const App = () => {
           width: '100%',
         }}
       >
-        {!score ? `Your score:  ${score}` : 'click on a tile'}
+        {score ? `Your score:  ${score}` : 'click on a tile'}
       </div>
       <div
         style={{
