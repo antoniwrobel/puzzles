@@ -16,8 +16,8 @@ const initialBoardData = Array(tileCount)
 const App = () => {
   const isMobile = window.innerWidth < 690
 
-  const tileWidth = 100
-  const tileHeight = 100
+  const tileWidth = isMobile ? 100 : 200
+  const tileHeight = isMobile ? 100 : 200
 
   const boardDimenstions = {
     x: boardSize * tileWidth,
