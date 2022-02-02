@@ -4,30 +4,32 @@ import _cloneDeep from 'lodash.clonedeep'
 
 const boardSize = 3
 const tileCount = boardSize * boardSize
-const tileWidth = 200
-const tileHeight = 200
 const gapSize = 10
-
-const boardDimenstions = {
-  x: boardSize * tileWidth,
-  y: boardSize * tileHeight,
-}
 
 //this should not be shuffled, just randomly trigger shuffle for a few times, to be sure it's possible to solve
 const shuffleBoard = (board) => _shuffle(board)
-
-const getMatrixPosition = (index) => {
-  return {
-    row: Math.floor(index / boardSize),
-    col: index % boardSize,
-  }
-}
 
 const initialBoardData = Array(tileCount)
   .fill({})
   .map((_, id) => ({ id }))
 
 const App = () => {
+  const isMobile = window.innerWidth < 690
+
+  const tileWidth = 100
+  const tileHeight = 100
+
+  const boardDimenstions = {
+    x: boardSize * tileWidth,
+    y: boardSize * tileHeight,
+  }
+
+  const getMatrixPosition = (index) => {
+    return {
+      row: Math.floor(index / boardSize),
+      col: index % boardSize,
+    }
+  }
   const [score, setScore] = useState(0)
   const [board, setBoard] = useState(initialBoardData)
   const [hoveredTile, setHoveredTile] = useState(null)
@@ -173,9 +175,11 @@ const App = () => {
                 onMouseEnter={() => handleHoverTile(tile.index)}
                 key={tile.index}
                 style={{
+                  maxWidth: isMobile
+                    ? `calc(100% / ${boardSize})`
+                    : '100%',
                   cursor: tile.disabled ? 'not-allowed' : 'pointer',
                   opacity: tile.disabled ? 0 : 1,
-
                   width: `${tileWidth - gapSize}px`,
                   height: `${tileHeight - gapSize}px`,
                   display: 'grid',
